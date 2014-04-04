@@ -74,7 +74,7 @@ void ofxOceanRenderer::setup(ofxOcean* o, int tilesWide, int tilesTall)
 	ofxOceanTile* tile;
 	for (int y = 0; y < tiles_y; y++) {
 		for (int x = 0; x < tiles_x; x++) {
-			int chDist = MAX(fabs(tiles_y/2 - y), fabs(tiles_x/2 - x));
+			int chDist = MAX(ABS(tiles_y/2 - y), ABS(tiles_x/2 - x));
 			chDist = chDist > 0 ? chDist-1 : 0;
 			int cy = y-tiles_y/2;
 			int cx = x-tiles_x/2;
