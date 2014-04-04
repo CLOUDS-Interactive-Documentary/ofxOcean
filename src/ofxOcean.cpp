@@ -82,11 +82,11 @@ void ofxOcean::setup()
 
     data.clear();
 	// Init the water height matrix
-	data.reserve(width*height);
+	data.resize(width*height);
 	t_x.clear();
-	t_x.reserve(width*height);
+	t_x.resize(width*height);
     t_y.clear();
-	t_y.reserve(width*height);
+	t_y.resize(width*height);
 
     heightDenom = width*height+size.x*size.y;
 	// Geometry size
@@ -103,7 +103,7 @@ void ofxOcean::setup()
 
 void ofxOcean::InitWaveGenerator()
 {
-    h0.reserve(width*height);
+    h0.resize(width*height);
     ofVec2f wind = ofVec2f (windSpeed, 0.0);
     ofVec2f vec_k;
 	// Initialize wave generator
