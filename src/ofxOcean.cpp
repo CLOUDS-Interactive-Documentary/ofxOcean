@@ -67,26 +67,21 @@ ofxOcean::ofxOcean()
 ofxOcean::~ofxOcean()
 {
     if(allocated){
-        delete[] vertices;
-        delete[] baseUVs;
-        delete[] baseNormals;
-        delete[] baseTangents;
-        delete[] fftInputBuf;
-        delete[] fftOutputBuf;
-        
+		clear();
     }
 }
 
 void ofxOcean::setup()
 {
+	if(allocated){
+		clear();
+	}
 
-    data.clear();
 	// Init the water height matrix
-	data.reserve(width*height);
-	t_x.clear();
-	t_x.reserve(width*height);
-    t_y.clear();
-	t_y.reserve(width*height);
+	data.resize(width*height);
+	t_x.resize(width*height);
+	t_y.resize(width*height);
+    h0.resize(width*height);
 
     heightDenom = width*height+size.x*size.y;
 	// Geometry size
@@ -103,7 +98,6 @@ void ofxOcean::setup()
 
 void ofxOcean::InitWaveGenerator()
 {
-    h0.resize(width*height);
     ofVec2f wind = ofVec2f (windSpeed, 0.0);
     ofVec2f vec_k;
 	// Initialize wave generator
@@ -154,6 +148,23 @@ void ofxOcean::GenerateGeometry() {
 	}
 }
 
+void ofxOcean::clear(){
+
+	delete[] vertices;
+	delete[] baseUVs;
+	delete[] baseNormals;
+	delete[] baseTangents;
+	delete[] fftInputBuf;
+	delete[] fftOutputBuf;
+
+	h0.clear();
+    data.clear();
+	t_x.clear();
+    t_y.clear();
+
+	allocated = false;
+}
+
 void ofxOcean::setFrameNum(int _frameNum)
 {
     frameNum = _frameNum;
@@ -161,7 +172,11 @@ void ofxOcean::setFrameNum(int _frameNum)
 
 void ofxOcean::update()
 {
-    heightDenom = width*height+size.x*size.y;
+
+	if(data.size() != width*height){
+		setup();
+	}
+
 	ofVec3f centerOffset;
 	centerOffset.x = floor(cameraPosition.x/size.x) * size.x;
 	centerOffset.z = floor(cameraPosition.z/size.z) * size.z;

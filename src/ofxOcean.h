@@ -28,6 +28,7 @@ class ofxOcean
 
 	void setup();
 	void update();
+	void clear();
 
     ofVec3f floatingPosition(ofVec3f position, bool considerChoppy = true);
     ofVec3f floatingPosition(float u, float v, bool considerChoppy = true);
