@@ -103,7 +103,7 @@ void ofxOcean::setup()
 
 void ofxOcean::InitWaveGenerator()
 {
-    h0.reserve(width*height);
+    h0.resize(width*height);
     ofVec2f wind = ofVec2f (windSpeed, 0.0);
     ofVec2f vec_k;
 	// Initialize wave generator
