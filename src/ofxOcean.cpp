@@ -360,8 +360,8 @@ float ofxOcean::waterHeight(float u, float v)
     y = (y - floor(y)) * height;
 
     float fx, fy, cx, cy;
-    fx = int(floor(x));
-    fy = int(floor(y));
+    fx = int(floor(x))%width;;
+    fy = int(floor(y))%height;
     cx = int(ceil(x))%width;
     cy = int(ceil(y))%height;
 
